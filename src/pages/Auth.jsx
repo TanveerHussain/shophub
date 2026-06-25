@@ -1,6 +1,6 @@
-import { useContext, useState } from 'react';
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { AuthContext } from '../context/AuthContext';
+import { useAuth } from '../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
 
 export default function Auth() {
@@ -9,7 +9,7 @@ export default function Auth() {
 
   const navigate = useNavigate();
 
-  const { signUp, user, logout, login } = useContext(AuthContext);
+  const { signUp, login } = useAuth(); 
 
   const {
     register,
@@ -90,17 +90,27 @@ export default function Auth() {
             {mode === 'signup' ? (
               <p>
                 Already have an account?{' '}
-                <span className="auth-link" onClick={() => setMode('login')}>
+                <button
+                  style={{ background: 'transparent', border: 'none' }}
+                  type="button"
+                  className="auth-link"
+                  onClick={() => setMode('login')}
+                >
                   Login
-                </span>
+                </button>
               </p>
             ) : (
               <p>
                 {' '}
                 Don't have an account?{' '}
-                <span className="auth-link" onClick={() => setMode('signup')}>
+                <button
+                  style={{ background: 'transparent', border: 'none' }}
+                  type="button"
+                  className="auth-link"
+                  onClick={() => setMode('signup')}
+                >
                   Sign Up
-                </span>
+                </button>
               </p>
             )}
           </div>
